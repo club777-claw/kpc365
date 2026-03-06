@@ -1,0 +1,65 @@
+baseURL: "https://kpc365.com/"
+languageCode: "ko"
+title: "포커클럽 KPC365 | 온라인 홀덤 포커 정보"
+theme: "PaperMod"
+
+defaultContentLanguage: ko
+
+params:
+  env: production
+  title: "포커클럽 KPC365"
+  description: "포커클럽 KPC365 공식 블로그. 텍사스 홀덤, 포커 전략, 토너먼트 정보를 제공합니다."
+  keywords: [포커클럽, 포커, 홀덤, 텍사스홀덤, 온라인포커, KPC365, 포커전략, 토너먼트]
+  author: "포커클럽 KPC365"
+  defaultTheme: dark
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  homeInfoParams:
+    Title: "포커클럽 KPC365 🃏"
+    Content: "텍사스 홀덤, 포커 전략, 토너먼트 정보를 제공하는 포커클럽 공식 블로그입니다."
+
+  socialIcons:
+    - name: telegram
+      url: "https://t.me/Kpokerclub_Ace"
+
+  analytics:
+    google:
+      SiteVerificationTag: "URk4rtuRYOclln_kR0B54wCAqENtmAPq0cqDeg6ZVXc"
+
+menu:
+  main:
+    - identifier: blog
+      name: 블로그
+      url: /posts/
+      weight: 10
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+pygmentsUseClasses: true
+pygmentsCodeFences: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+minify:
+  disableXML: true
+  minifyOutput: true
