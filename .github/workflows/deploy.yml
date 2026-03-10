@@ -43,3 +43,25 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Submit to IndexNow
+        run: |
+          KEY="48935d504ef1996e64b264e844273026"
+          SITE="https://kpc365.com"
+          URLS=$(curl -s "${SITE}/sitemap.xml" 2>/dev/null | grep -oP '<loc>\K[^<]+' | head -20)
+          if [ -z "$URLS" ]; then exit 0; fi
+          URL_ARRAY=$(echo "$URLS" | python3 -c "import sys,json; urls=[u.strip() for u in sys.stdin if u.strip()]; print(json.dumps(urls))")
+          PAYLOAD=$(python3 -c "
+          import json
+          payload = {
+            'host': 'kpc365.com',
+            'key': '${KEY}',
+            'keyLocation': '${SITE}/${KEY}.txt',
+            'urlList': $URL_ARRAY
+          }
+          print(json.dumps(payload))
+          ")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+          echo "IndexNow response: $STATUS"
